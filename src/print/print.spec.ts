@@ -65,7 +65,7 @@ it("sends PDF file to the specific printer", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-to",
-    printer,
+    '"Zebra"',
     "-silent",
     filename,
   ]);
@@ -80,7 +80,7 @@ it("sends PDF file to the specific printer with a space in its name", async () =
 
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-to",
-    printer,
+    '"Microsoft Print to PDF"',
     "-silent",
     filename,
   ]);
@@ -357,7 +357,7 @@ it("allows to set multiple print settings", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-to",
-    "Zebra",
+    '"Zebra"',
     "-silent",
     "-print-settings",
     "1-3,5,odd,fit,bin=2,paper=A2",

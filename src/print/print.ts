@@ -37,8 +37,6 @@ export default async function print(
   //if (!pdf) throw "No PDF specified";
   //if (!fs.existsSync(pdf)) throw "No such file";
 
-  
-
   let sumatraPdf =
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
   if (!options.sumatraPdfPath) sumatraPdf = fixPathForAsarUnpack(sumatraPdf);
@@ -49,7 +47,7 @@ export default async function print(
     args.push("-print-dialog");
   } else {
     if (printer) {
-      args.push("-print-to", printer);
+      args.push("-print-to", '"' + printer + '"');
     } else {
       args.push("-print-to-default");
     }
