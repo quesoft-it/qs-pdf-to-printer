@@ -1,5 +1,6 @@
 import path from "path";
-import fs from "fs";
+import fs from "fs/promises";
+import fsBase from "fs";
 import execAsync from "../utils/exec-file-async";
 import fixPathForAsarUnpack from "../utils/electron-util";
 import throwIfUnsupportedOperatingSystem from "../utils/throw-if-unsupported-os";
@@ -26,18 +27,34 @@ const validScales = ["noscale", "shrink", "fit"];
 const validSides = ["duplex", "duplexshort", "duplexlong", "simplex"];
 
 export default async function print(
-  pdf: string,
+  pdf: string | Buffer,
   options: PrintOptions = {}
 ): Promise<void> {
   throwIfUnsupportedOperatingSystem();
-  if (!pdf) throw "No PDF specified";
-  if (!fs.existsSync(pdf)) throw "No such file";
+  let tmpFilePath: string;
+  const args: string[] = [];
+
+  //if (!pdf) throw "No PDF specified";
+  //if (!fs.existsSync(pdf)) throw "No such file";
+
+  if (typeof pdf === "undefined") {
+    throw "No file specified";
+  } else if (typeof pdf === "string") {
+    if (!fsBase.existsSync(pdf)) throw "No such file";
+
+    args.push(`'${pdf}'`);
+  } else if (!isPdf(pdf)) {
+    throw "File has to be a PDF";
+  } else {
+    tmpFilePath = `C:/Windows/Temp/${(Math.random() + 1).toString(36).substring(7)}.pdf`;
+
+    await fs.writeFile(tmpFilePath, pdf);
+    args.push(`'${tmpFilePath}'`);
+  }
 
   let sumatraPdf =
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
   if (!options.sumatraPdfPath) sumatraPdf = fixPathForAsarUnpack(sumatraPdf);
-
-  const args: string[] = [];
 
   const { printer, silent, printDialog } = options;
 
@@ -63,11 +80,18 @@ export default async function print(
   args.push(pdf);
 
   try {
-    await execAsync(sumatraPdf, args);
+    await execAsync(sumatraPdf, args).finally(() => {
+      if (tmpFilePath) fs.rm(tmpFilePath);
+    });
   } catch (error) {
     throw error;
   }
 }
+
+const isPdf = (buffer: Buffer) =>
+  Buffer.isBuffer(buffer) &&
+  buffer.lastIndexOf("%PDF-") === 0 &&
+  buffer.lastIndexOf("%%EOF") > -1;
 
 function getPrintSettings(options: PrintOptions): string[] {
   const {

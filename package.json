@@ -1,11 +1,12 @@
 {
-  "name": "pdf-to-printer",
-  "version": "5.6.0",
+  "name": "qs-pdf-to-printer",
+  "version": "5.6.1",
   "description": "A utility for printing PDFs and images from Node.js and Electron.",
+  "author": "QueSoft IT <it@quesoft.hu>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/artiebits/pdf-to-printer.git"
+    "url": "https://github.com/quesoft-it/qs-pdf-to-printer.git"
   },
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
