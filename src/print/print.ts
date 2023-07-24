@@ -37,20 +37,7 @@ export default async function print(
   //if (!pdf) throw "No PDF specified";
   //if (!fs.existsSync(pdf)) throw "No such file";
 
-  if (typeof pdf === "undefined") {
-    throw "No file specified";
-  } else if (typeof pdf === "string") {
-    if (!fsBase.existsSync(pdf)) throw "No such file";
-
-    args.push(`'${pdf}'`);
-  } else if (!isPdf(pdf)) {
-    throw "File has to be a PDF";
-  } else {
-    tmpFilePath = `C:/Windows/Temp/${(Math.random() + 1).toString(36).substring(7)}.pdf`;
-
-    await fs.writeFile(tmpFilePath, pdf);
-    args.push(`'${tmpFilePath}'`);
-  }
+  
 
   let sumatraPdf =
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
@@ -77,7 +64,23 @@ export default async function print(
     args.push("-print-settings", printSettings.join(","));
   }
 
-  args.push(pdf);
+  //args.push(pdf);
+  if (typeof pdf === "undefined") {
+    throw "No PDF specified";
+  } else if (typeof pdf === "string") {
+    if (!fsBase.existsSync(pdf)) throw "No such file";
+
+    args.push(`${pdf}`);
+  } else if (!isPdf(pdf)) {
+    throw "File has to be a PDF";
+  } else {
+    tmpFilePath = `C:/Windows/Temp/${(Math.random() + 1)
+      .toString(36)
+      .substring(7)}.pdf`;
+
+    await fs.writeFile(tmpFilePath, pdf);
+    args.push(`${tmpFilePath}`);
+  }
 
   try {
     await execAsync(sumatraPdf, args).finally(() => {
