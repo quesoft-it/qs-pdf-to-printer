@@ -34,12 +34,13 @@ export default async function print(
   let tmpFilePath: string;
   const args: string[] = [];
 
-  //if (!pdf) throw "No PDF specified";
-  //if (!fs.existsSync(pdf)) throw "No such file";
-
   let sumatraPdf =
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
   if (!options.sumatraPdfPath) sumatraPdf = fixPathForAsarUnpack(sumatraPdf);
+
+  if (sumatraPdf.includes(" ")) {
+    sumatraPdf = '"' + sumatraPdf + '"';
+  }
 
   const { printer, silent, printDialog } = options;
 
@@ -62,7 +63,6 @@ export default async function print(
     args.push("-print-settings", printSettings.join(","));
   }
 
-  //args.push(pdf);
   if (typeof pdf === "undefined") {
     throw "No PDF specified";
   } else if (typeof pdf === "string") {
@@ -72,7 +72,7 @@ export default async function print(
   } else if (!isPdf(pdf)) {
     throw "File has to be a PDF";
   } else {
-    tmpFilePath = `C:/Users/Public/tmp/${(Math.random() + 1)
+    tmpFilePath = `C:/ProgramData/${(Math.random() + 1)
       .toString(36)
       .substring(7)}.pdf`;
 
