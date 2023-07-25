@@ -4,7 +4,7 @@ FORK OF [artiebits/pdf-to-printer](https://github.com/artiebits/pdf-to-printer)
 
 A utility for printing PDFs and images from Node.js and Electron.
 
-- Available only on Windows. The Unix-like operating systems utility can be found on https://github.com/artiebits/unix-print.
+- Available only on Windows. The Unix-like operating systems utility can be found on https://github.com/quesoft-it/qs-unix-print.
 - It supports label printers like Rollo and Zebra.
 
 ## Support This Project

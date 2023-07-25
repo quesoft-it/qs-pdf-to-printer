@@ -38,9 +38,7 @@ export default async function print(
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
   if (!options.sumatraPdfPath) sumatraPdf = fixPathForAsarUnpack(sumatraPdf);
 
-  if (sumatraPdf.includes(" ")) {
-    sumatraPdf = '"' + sumatraPdf + '"';
-  }
+  if (sumatraPdf.includes(" ")) sumatraPdf = sumatraPdf.replace(" ", "` ");
 
   const { printer, silent, printDialog } = options;
 
@@ -81,7 +79,7 @@ export default async function print(
   }
 
   try {
-    await execAsync(sumatraPdf, args).finally(() => {
+    await execAsync(sumatraPdf, args, { shell: 'powershell.exe' }).finally(() => {
       if (tmpFilePath) fs.rm(tmpFilePath);
     });
   } catch (error) {
