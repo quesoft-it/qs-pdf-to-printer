@@ -72,7 +72,7 @@ export default async function print(
   } else if (!isPdf(pdf)) {
     throw "File has to be a PDF";
   } else {
-    tmpFilePath = `C:/Windows/Temp/${(Math.random() + 1)
+    tmpFilePath = `C:/Users/Public/tmp/${(Math.random() + 1)
       .toString(36)
       .substring(7)}.pdf`;
 
