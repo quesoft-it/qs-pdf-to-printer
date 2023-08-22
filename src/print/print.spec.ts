@@ -52,7 +52,7 @@ it("sends the PDF file to the default printer", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     sumatraPdfPath,
     ["-print-to-default", "-silent", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -66,7 +66,7 @@ it("sends PDF file to the specific printer", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     sumatraPdfPath,
     ["-print-to", '"Zebra"', "-silent", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -80,7 +80,7 @@ it("sends PDF file to the specific printer with a space in its name", async () =
   expect(execAsync).toHaveBeenCalledWith(
     sumatraPdfPath,
     ["-print-to", '"Microsoft Print to PDF"', "-silent", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -92,7 +92,7 @@ it("allows users to specify which pages to print in the document", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     "mocked_path_SumatraPDF-3.4.6-32.exe",
     ["-print-to-default", "-silent", "-print-settings", "1,3", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -123,7 +123,7 @@ describe("paper size", () => {
           `paper=${paperSize}`,
           filename,
         ],
-        { shell: 'powershell.exe' }
+        { shell: "powershell.exe" }
       );
     });
   });
@@ -146,7 +146,7 @@ describe("orientation", () => {
           orientation,
           filename,
         ],
-        { shell: 'powershell.exe' }
+        { shell: "powershell.exe" }
       );
     });
   });
@@ -181,7 +181,7 @@ describe("monochrome", () => {
         "monochrome",
         filename,
       ],
-      { shell: 'powershell.exe' }
+      { shell: "powershell.exe" }
     );
   });
 
@@ -196,7 +196,7 @@ describe("monochrome", () => {
     expect(execAsync).toHaveBeenCalledWith(
       sumatraPdfPath,
       ["-print-to-default", "-silent", "-print-settings", "color", filename],
-      { shell: 'powershell.exe' }
+      { shell: "powershell.exe" }
     );
   });
 });
@@ -214,7 +214,7 @@ describe("subset", () => {
       expect(execAsync).toHaveBeenCalledWith(
         sumatraPdfPath,
         ["-print-to-default", "-silent", "-print-settings", "odd", filename],
-        { shell: 'powershell.exe' }
+        { shell: "powershell.exe" }
       );
     });
   });
@@ -242,7 +242,7 @@ describe("scale", () => {
       expect(execAsync).toHaveBeenCalledWith(
         sumatraPdfPath,
         ["-print-to-default", "-silent", "-print-settings", scale, filename],
-        { shell: 'powershell.exe' }
+        { shell: "powershell.exe" }
       );
     });
   });
@@ -270,7 +270,7 @@ describe("side", () => {
       expect(execAsync).toHaveBeenCalledWith(
         sumatraPdfPath,
         ["-print-to-default", "-silent", "-print-settings", side, filename],
-        { shell: 'powershell.exe' }
+        { shell: "powershell.exe" }
       );
     });
   });
@@ -297,7 +297,7 @@ describe("bin", () => {
     expect(execAsync).toHaveBeenCalledWith(
       sumatraPdfPath,
       ["-print-to-default", "-silent", "-print-settings", "bin=1", filename],
-      { shell: 'powershell.exe' }
+      { shell: "powershell.exe" }
     );
   });
 });
@@ -312,7 +312,7 @@ describe("copies", () => {
     expect(execAsync).toHaveBeenCalledWith(
       sumatraPdfPath,
       ["-print-to-default", "-silent", "-print-settings", "3x", filename],
-      { shell: 'powershell.exe' }
+      { shell: "powershell.exe" }
     );
   });
 });
@@ -326,7 +326,7 @@ it("does not set a printer when printDialog is set to true", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     sumatraPdfPath,
     ["-print-dialog", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -339,7 +339,7 @@ it("allows to turn on SumatraPDF error messages", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     sumatraPdfPath,
     ["-print-to-default", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -366,7 +366,7 @@ it("allows to set multiple print settings", async () => {
       "1-3,5,odd,fit,bin=2,paper=A2",
       filename,
     ],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 
@@ -379,7 +379,7 @@ it("works when custom SumatraPDF path specified", async () => {
   expect(execAsync).toHaveBeenCalledWith(
     anotherSumatraPdfPath,
     ["-print-to-default", "-silent", filename],
-    { shell: 'powershell.exe' }
+    { shell: "powershell.exe" }
   );
 });
 

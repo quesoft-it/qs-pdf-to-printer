@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import fsBase from "fs";
 import execAsync from "../utils/exec-file-async";
 import fixPathForAsarUnpack from "../utils/electron-util";
@@ -79,9 +79,11 @@ export default async function print(
   }
 
   try {
-    await execAsync(sumatraPdf, args, { shell: 'powershell.exe' }).finally(() => {
-      if (tmpFilePath) fs.rm(tmpFilePath);
-    });
+    await execAsync(sumatraPdf, args, { shell: "powershell.exe" }).finally(
+      () => {
+        if (tmpFilePath) fs.rm(tmpFilePath);
+      }
+    );
   } catch (error) {
     throw error;
   }
