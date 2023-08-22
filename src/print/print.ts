@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import fsBase from "fs";
 import execAsync from "../utils/exec-file-async";
 import fixPathForAsarUnpack from "../utils/electron-util";
