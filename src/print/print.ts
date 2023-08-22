@@ -81,7 +81,7 @@ export default async function print(
   try {
     await execAsync(sumatraPdf, args, { shell: "powershell.exe" }).finally(
       () => {
-        if (tmpFilePath) fs.rm(tmpFilePath);
+        if (tmpFilePath) fs.unlink(tmpFilePath);
       }
     );
   } catch (error) {
