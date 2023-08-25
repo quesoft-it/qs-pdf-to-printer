@@ -30,15 +30,15 @@ export default async function print(
   pdf: string | Buffer,
   options: PrintOptions = {}
 ): Promise<void> {
-  throwIfUnsupportedOperatingSystem();
   let tmpFilePath: string;
   const args: string[] = [];
 
   let sumatraPdf =
     options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
-  if (!options.sumatraPdfPath) sumatraPdf = fixPathForAsarUnpack(sumatraPdf);
+  if (!options.sumatraPdfPath && !sumatraPdf.includes("app.asar.unpacked"))
+    sumatraPdf = sumatraPdf.replace("app.asar", "app.asar.unpacked");
 
-  if (sumatraPdf.includes(" ")) sumatraPdf = sumatraPdf.replace(" ", "` ");
+  if (sumatraPdf.includes(" ")) sumatraPdf = sumatraPdf.split(" ").join("` ");
 
   const { printer, silent, printDialog } = options;
 
