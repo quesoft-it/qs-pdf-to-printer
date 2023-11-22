@@ -34,7 +34,11 @@ export default async function print(
   const args: string[] = [];
 
   let sumatraPdf =
-    options.sumatraPdfPath || path.join(__dirname, "SumatraPDF-3.4.6-32.exe");
+    options.sumatraPdfPath ||
+    path.join(
+      __dirname,
+      "/quesoft-cli-pdf-printer/QueSoft-CLI-PDF-Printer.exe"
+    );
   if (!options.sumatraPdfPath && !sumatraPdf.includes("app.asar.unpacked"))
     sumatraPdf = sumatraPdf.replace("app.asar", "app.asar.unpacked");
 
@@ -42,24 +46,24 @@ export default async function print(
 
   const { printer, silent, printDialog } = options;
 
-  if (printDialog) {
+  /*if (printDialog) {
     args.push("-print-dialog");
+  } else {*/
+  if (printer) {
+    args.push('"' + printer + '"');
   } else {
-    if (printer) {
-      args.push("-print-to", '"' + printer + '"');
-    } else {
-      args.push("-print-to-default");
-    }
-    if (silent !== false) {
+    throw "Printer name is required";
+  }
+  /*if (silent !== false) {
       args.push("-silent");
-    }
-  }
+    }*/
+  //}
 
-  const printSettings = getPrintSettings(options);
+  //const printSettings = getPrintSettings(options);
 
-  if (printSettings.length) {
+  /*if (printSettings.length) {
     args.push("-print-settings", printSettings.join(","));
-  }
+  }*/
 
   if (typeof pdf === "undefined") {
     throw "No PDF specified";

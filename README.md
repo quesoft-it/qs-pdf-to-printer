@@ -2,6 +2,8 @@
 
 FORK OF [artiebits/pdf-to-printer](https://github.com/artiebits/pdf-to-printer)
 
+IMPORTANT!!! - Project has editet in common ways, README hasn't been updated yet, but we will do it soon.
+
 A utility for printing PDFs and images from Node.js and Electron.
 
 - Available only on Windows. The Unix-like operating systems utility can be found on https://github.com/quesoft-it/qs-unix-print.
