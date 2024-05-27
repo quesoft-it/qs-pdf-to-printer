@@ -1,6 +1,6 @@
 {
   "name": "qs-pdf-to-printer",
-  "version": "5.7.11",
+  "version": "5.7.12",
   "description": "A utility for printing PDFs and images from Node.js and Electron.",
   "author": "QueSoft IT <it@quesoft.hu>",
   "license": "MIT",
